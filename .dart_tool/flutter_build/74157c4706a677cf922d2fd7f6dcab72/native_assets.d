@@ -1,0 +1,1 @@
+ /home/forhad/AndroidStudioProjects/Untitled\ Folder/.dart_tool/flutter_build/74157c4706a677cf922d2fd7f6dcab72/native_assets.yaml: 
