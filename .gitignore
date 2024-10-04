@@ -9,6 +9,7 @@ firebase-debug.*.log*
 
 # Firebase cache
 .firebase/
+lib/firebase_options.dart
 
 # Firebase config
 
