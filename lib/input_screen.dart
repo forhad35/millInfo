@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:mill_info/homeScreen.dart';
+import 'package:mill_info/shared_value.dart';
 
 class AddData extends StatefulWidget {
   const AddData({super.key});
@@ -236,7 +237,7 @@ SizedBox(height: 10,),
              OutlinedButton(onPressed: ()async{
                if(isAddBalance){
                  if(formKeyBalance.currentState!.validate()){
-                   await FirebaseFirestore.instance.collection('balance').add({
+                   await FirebaseFirestore.instance.collection('millNames').doc(millId.$).collection('balance').add({
                      'time': inputDate.text,
                      'details':inputDetailsBalance.text,
                      'balance':inputBalance.text,
@@ -250,7 +251,7 @@ SizedBox(height: 10,),
                  }
                }else{
                  if(formKey.currentState!.validate()){
-                   await FirebaseFirestore.instance.collection('millData').add({
+                   await FirebaseFirestore.instance.collection('millNames').doc(millId.$).collection('millData').add({
                      'time': inputDate.text,
                      'details':inputDetails.text,
                      'price':inputPrice.text,

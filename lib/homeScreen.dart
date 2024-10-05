@@ -5,9 +5,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mill_info/balance_screen.dart';
 import 'package:mill_info/input_screen.dart';
+import 'package:mill_info/shared_value.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+
+  const HomeScreen({super.key, });
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -27,7 +29,9 @@ class _HomeScreenState extends State<HomeScreen> {
         leading: Text(""),
         actions: [
           TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const BalanceScreen())), child: const Text("Balance")),
-          IconButton(onPressed: ()=>Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const AddData()),ModalRoute.withName('/'),), icon: Icon(Icons.add))
+         if (userCategory.$=="millManager") IconButton(
+             onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const AddData()),),
+             icon: Icon(Icons.add)) 
 
         ],
       ),
@@ -46,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
           //amount row
 
           StreamBuilder(
-              stream: FirebaseFirestore.instance.collection('millData').orderBy('dateTime',descending: true).snapshots(),
+              stream: FirebaseFirestore.instance.collection('millNames').doc(millId.$).collection('millNames').doc(millId.$).collection('millData').orderBy('dateTime',descending: true).snapshots(),
               builder: (context, AsyncSnapshot<QuerySnapshot> snapshot){
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator()); // Display a loading indicator while waiting for data
@@ -91,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   getReserveBalance(){
     return  FutureBuilder(
-      future:FirebaseFirestore.instance.collection('balance').get(),
+      future:FirebaseFirestore.instance.collection('millNames').doc(millId.$).collection('balance').get(),
       builder: (ctx, snapshot) {
         // Checking if future is resolved or not
         if (snapshot.connectionState == ConnectionState.done) {
@@ -124,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   setAmount(){
   return  FutureBuilder(
-      future:FirebaseFirestore.instance.collection('millData').get(),
+      future:FirebaseFirestore.instance.collection('millNames').doc(millId.$).collection('millData').get(),
       builder: (ctx, snapshot) {
         // Checking if future is resolved or not
         if (snapshot.connectionState == ConnectionState.done) {
@@ -174,7 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 getTotalAmount(){
     return  FutureBuilder(
-      future:FirebaseFirestore.instance.collection('balance').get(),
+      future:FirebaseFirestore.instance.collection('millNames').doc(millId.$).collection('balance').get(),
       builder: (ctx, snapshot) {
         // Checking if future is resolved or not
         if (snapshot.connectionState == ConnectionState.done) {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mill_info/homeScreen.dart';
-
+import 'package:shared_value/shared_value.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mill_info/input_screen.dart';
 import 'package:mill_info/login_screen.dart';
@@ -12,7 +12,7 @@ main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(SharedValue.wrapApp(const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

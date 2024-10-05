@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mill_info/homeScreen.dart';
+import 'package:mill_info/shared_value.dart';
 
 class BalanceScreen extends StatefulWidget {
   const BalanceScreen({super.key});
@@ -19,7 +20,7 @@ class _BalanceScreenState extends State<BalanceScreen> {
       ),
       body: Container(
         child: StreamBuilder(
-            stream: FirebaseFirestore.instance.collection('balance').orderBy('dateTime',descending: true).snapshots(),
+            stream: FirebaseFirestore.instance.collection('millNames').doc(millId.$).collection('balance').orderBy('dateTime',descending: true).snapshots(),
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot){
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator()); // Display a loading indicator while waiting for data
@@ -64,7 +65,7 @@ class _BalanceScreenState extends State<BalanceScreen> {
   }
   setAmount(){
     return  FutureBuilder(
-      future:FirebaseFirestore.instance.collection('balance').get(),
+      future:FirebaseFirestore.instance.collection('millNames').doc(millId.$).collection('balance').get(),
       builder: (ctx, snapshot) {
         // Checking if future is resolved or not
         if (snapshot.connectionState == ConnectionState.done) {
