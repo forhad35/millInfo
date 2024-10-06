@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:mill_info/homeScreen.dart';
+import 'package:mill_info/home_screen.dart';
 import 'package:mill_info/shared_value.dart';
 
 class BalanceScreen extends StatefulWidget {

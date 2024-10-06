@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
-import 'package:mill_info/homeScreen.dart';
+import 'package:mill_info/home_screen.dart';
 import 'package:mill_info/shared_value.dart';
 
 class AddData extends StatefulWidget {
